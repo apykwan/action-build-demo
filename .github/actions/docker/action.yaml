@@ -20,10 +20,8 @@ runs:
         cat password.txt | docker login --username ${{ inputs.docker_hub_user }} --password-stdin
       shell: bash
     - name: build image
-      run: |
-        docker image build -t ${{ inputs.docker_hub_user }}/${{ inputs.image_name }} .
+      run: docker image build -t ${{ inputs.docker_hub_user }}/${{ inputs.image_name }} .
       shell: bash
     - name: push image
-      run: |
-        docker image push ${{ inputs.docker_hub_user }}/${{ inputs.image_name }}
+      run: docker image push ${{ inputs.docker_hub_user }}/${{ inputs.image_name }}
       shell: bash
