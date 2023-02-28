@@ -1,16 +1,16 @@
-name: build-docker-image
+name: testing
 on:
   workflow_dispatch:
   push:
     branches:
-      - 'master'
+      - "main"
 
 jobs:
   build-docker-image:
     runs-on: ubuntu-22.04
     env:
       DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-      DOCKER_HUB_USER: xiaopeng163
+      DOCKER_HUB_USER: apkwan
 
     steps:
       - name: checkout code
@@ -18,10 +18,10 @@ jobs:
       - name: docker login
         run: |
           echo $DOCKER_HUB_TOKEN > password.txt
-          cat password.txt | docker login --username $DOCKER_HUB_USER --password-stdin
+          cat password.txt | docker login --username apkwan --password-stdin
       - name: build image
         run: |
-          docker image build -t $DOCKER_HUB_USER/fastapi-demo:latest .
+          docker image build -t apkwan/fastapi-demo:latest .
       - name: push image
         run: |
-          docker image push $DOCKER_HUB_USER/fastapi-demo:latest
+          docker image push apkwan/fastapi-demo:latest
